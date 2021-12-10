@@ -1,12 +1,29 @@
 package com.example.recipeassignment.model;
 
+import javax.persistence.*;
 import java.util.List;
 
+@Entity
 public class Recipe {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(updatable = false)
     private int id;
     private String name;
+    @OneToMany(
+            cascade = {CascadeType.REFRESH, CascadeType.DETACH},
+            fetch = FetchType.LAZY,
+            mappedBy = "recipe"
+    )
     private List<RecipeIngredient> ingredients;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_recipe_instruction_id", table = "recipe")
     private RecipeInstruction instruction;
+    @ManyToMany(
+            cascade = {CascadeType.REFRESH, CascadeType.DETACH},
+            fetch = FetchType.LAZY,
+            mappedBy = "recipes"
+    )
     private List<RecipeCategory> categories;
 
     public Recipe() {

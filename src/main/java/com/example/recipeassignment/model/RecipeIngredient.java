@@ -1,10 +1,27 @@
 package com.example.recipeassignment.model;
 
+import com.example.recipeassignment.model.constants.EntityConstants;
+import com.example.recipeassignment.model.constants.Measurement;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
+
+import static com.example.recipeassignment.model.constants.EntityConstants.GENERATOR;
+import static com.example.recipeassignment.model.constants.EntityConstants.UUID_GENERATOR;
+
+@Entity
 public class RecipeIngredient {
+    @Id
+    @GeneratedValue(generator = GENERATOR)
+    @GenericGenerator(name = GENERATOR, strategy = UUID_GENERATOR)
+    @Column(updatable = false)
     private String id;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_ingredient_id", table = "ingredient")
     private Ingredient ingredient;
     private double amount;
     private Measurement measurement;
+    @ManyToOne
     private Recipe recipe;
 
     public RecipeIngredient() {
