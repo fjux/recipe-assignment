@@ -6,31 +6,34 @@ import javax.persistence.*;
 public class Ingredient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(unique = true, updatable = false)
-    private int id;
-    private String name;
+    @Column(unique = true, updatable = false, name = "id")
+    private int ingredientId;
+    @Column(unique = true)
+    private String ingredientName;
 
-    public Ingredient(int id, String name) {
-        this.id = id;
-        this.name = name;
+    public Ingredient(int ingredientId, String ingredientName) {
+        this.ingredientId = ingredientId;
+        this.ingredientName = ingredientName;
     }
 
     public Ingredient() {
     }
 
-    public int getId() {
-        return id;
+    public int getIngredientId() {
+        return ingredientId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIngredientId(int ingredientId) {
+        this.ingredientId = ingredientId;
     }
 
-    public String getName() {
-        return name;
+    public String getIngredientName() {
+        return ingredientName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setIngredientName(String ingredientName) {
+        this.ingredientName = ingredientName;
     }
+
+
 }

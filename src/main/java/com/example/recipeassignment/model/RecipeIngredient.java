@@ -1,6 +1,5 @@
 package com.example.recipeassignment.model;
 
-import com.example.recipeassignment.model.constants.EntityConstants;
 import com.example.recipeassignment.model.constants.Measurement;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -15,32 +14,33 @@ public class RecipeIngredient {
     @GeneratedValue(generator = GENERATOR)
     @GenericGenerator(name = GENERATOR, strategy = UUID_GENERATOR)
     @Column(updatable = false)
-    private String id;
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_ingredient_id", table = "ingredient")
+    private String recipeIngredientId;
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.REFRESH}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_ingredient_id")
     private Ingredient ingredient;
     private double amount;
     private Measurement measurement;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.REFRESH}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_recipe_id")
     private Recipe recipe;
 
     public RecipeIngredient() {
     }
 
-    public RecipeIngredient(String id, Ingredient ingredient, double amount, Measurement measurement, Recipe recipe) {
-        this.id = id;
+    public RecipeIngredient(String recipeIngredientId, Ingredient ingredient, double amount, Measurement measurement , Recipe recipe) {
+        this.recipeIngredientId = recipeIngredientId;
         this.ingredient = ingredient;
         this.amount = amount;
         this.measurement = measurement;
         this.recipe = recipe;
     }
 
-    public String getId() {
-        return id;
+    public String getRecipeIngredientId() {
+        return recipeIngredientId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setRecipeIngredientId(String recipeIngredientId) {
+        this.recipeIngredientId = recipeIngredientId;
     }
 
     public Ingredient getIngredient() {

@@ -7,9 +7,9 @@ import java.util.List;
 public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(updatable = false)
-    private int id;
-    private String name;
+    @Column(updatable = false, name = "id")
+    private int recipeId;
+    private String recipeName;
     @OneToMany(
             cascade = {CascadeType.REFRESH, CascadeType.DETACH},
             fetch = FetchType.LAZY,
@@ -17,7 +17,7 @@ public class Recipe {
     )
     private List<RecipeIngredient> ingredients;
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_recipe_instruction_id", table = "recipe")
+    @JoinColumn(name = "fk_recipe_instruction_id" )
     private RecipeInstruction instruction;
     @ManyToMany(
             cascade = {CascadeType.REFRESH, CascadeType.DETACH},
@@ -29,27 +29,27 @@ public class Recipe {
     public Recipe() {
     }
 
-    public Recipe(String name, List<RecipeIngredient> ingredients, RecipeInstruction instruction, List<RecipeCategory> categories) {
-        this.name = name;
+    public Recipe(String recipeName, List<RecipeIngredient> ingredients, RecipeInstruction instruction, List<RecipeCategory> categories) {
+        this.recipeName = recipeName;
         this.ingredients = ingredients;
         this.instruction = instruction;
         this.categories = categories;
     }
 
-    public int getId() {
-        return id;
+    public int getRecipeId() {
+        return recipeId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setRecipeId(int recipeId) {
+        this.recipeId = recipeId;
     }
 
-    public String getName() {
-        return name;
+    public String getRecipeName() {
+        return recipeName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setRecipeName(String recipeName) {
+        this.recipeName = recipeName;
     }
 
     public List<RecipeIngredient> getIngredients() {
