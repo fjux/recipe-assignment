@@ -13,10 +13,7 @@ public class RecipeCategory {
     private int recipeCategoryId;
     @Column(unique = true)
     private String category;
-    @ManyToMany(
-            cascade = {CascadeType.DETACH, CascadeType.REFRESH},
-            fetch = FetchType.LAZY
-    )
+    @ManyToMany( cascade = {CascadeType.DETACH, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     @JoinTable(name = "recipe_recipe_category",
             joinColumns = @JoinColumn(name = "fk_recipe_category_id"),
             inverseJoinColumns = @JoinColumn(name = "fk_recipe_id"))
@@ -54,4 +51,5 @@ public class RecipeCategory {
     public void setRecipes(Set<Recipe> recipes) {
         this.recipes = recipes;
     }
+
 }
