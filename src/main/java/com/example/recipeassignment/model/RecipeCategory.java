@@ -3,7 +3,7 @@ package com.example.recipeassignment.model;
 
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 public class RecipeCategory {
@@ -20,12 +20,12 @@ public class RecipeCategory {
     @JoinTable(name = "recipe_recipe_category",
             joinColumns = @JoinColumn(name = "fk_recipe_category_id"),
             inverseJoinColumns = @JoinColumn(name = "fk_recipe_id"))
-    private List<Recipe> recipes;
+    private Set<Recipe> recipes;
 
     public RecipeCategory() {
     }
 
-    public RecipeCategory(int recipeCategoryId, String category, List<Recipe> recipes) {
+    public RecipeCategory(int recipeCategoryId, String category, Set<Recipe> recipes) {
         this.recipeCategoryId = recipeCategoryId;
         this.category = category;
         this.recipes = recipes;
@@ -47,11 +47,11 @@ public class RecipeCategory {
         this.category = category;
     }
 
-    public List<Recipe> getRecipes() {
+    public Set<Recipe> getRecipes() {
         return recipes;
     }
 
-    public void setRecipes(List<Recipe> recipes) {
+    public void setRecipes(Set<Recipe> recipes) {
         this.recipes = recipes;
     }
 }

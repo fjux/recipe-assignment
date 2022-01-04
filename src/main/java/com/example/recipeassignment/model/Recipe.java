@@ -1,7 +1,7 @@
 package com.example.recipeassignment.model;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Recipe {
@@ -15,7 +15,7 @@ public class Recipe {
             fetch = FetchType.LAZY,
             mappedBy = "recipe"
     )
-    private List<RecipeIngredient> ingredients;
+    private Set<RecipeIngredient> ingredients;
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_recipe_instruction_id" )
     private RecipeInstruction instruction;
@@ -24,12 +24,12 @@ public class Recipe {
             fetch = FetchType.LAZY,
             mappedBy = "recipes"
     )
-    private List<RecipeCategory> categories;
+    private Set<RecipeCategory> categories;
 
     public Recipe() {
     }
 
-    public Recipe(String recipeName, List<RecipeIngredient> ingredients, RecipeInstruction instruction, List<RecipeCategory> categories) {
+    public Recipe(String recipeName, Set<RecipeIngredient> ingredients, RecipeInstruction instruction, Set<RecipeCategory> categories) {
         this.recipeName = recipeName;
         this.ingredients = ingredients;
         this.instruction = instruction;
@@ -52,11 +52,11 @@ public class Recipe {
         this.recipeName = recipeName;
     }
 
-    public List<RecipeIngredient> getIngredients() {
+    public Set<RecipeIngredient> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(List<RecipeIngredient> ingredients) {
+    public void setIngredients(Set<RecipeIngredient> ingredients) {
         this.ingredients = ingredients;
     }
 
@@ -68,11 +68,11 @@ public class Recipe {
         this.instruction = instruction;
     }
 
-    public List<RecipeCategory> getCategories() {
+    public Set<RecipeCategory> getCategories() {
         return categories;
     }
 
-    public void setCategories(List<RecipeCategory> categories) {
+    public void setCategories(Set<RecipeCategory> categories) {
         this.categories = categories;
     }
 }
