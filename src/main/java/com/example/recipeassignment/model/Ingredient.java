@@ -11,8 +11,7 @@ public class Ingredient {
     @Column(unique = true)
     private String ingredientName;
 
-    public Ingredient(int ingredientId, String ingredientName) {
-        this.ingredientId = ingredientId;
+    public Ingredient(String ingredientName) {
         this.ingredientName = ingredientName;
     }
 
