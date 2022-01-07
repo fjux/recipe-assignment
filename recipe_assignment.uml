@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>DATABASE</ID>
+  <OriginalElement>a0c4049d-0875-4db7-bac3-00dcd91bbfd4.SCHEMA:recipe_assignment</OriginalElement>
+  <nodes>
+    <node x="-1.5797720797720558" y="-115.67663817663816">a0c4049d-0875-4db7-bac3-00dcd91bbfd4.TABLE:recipe_assignment.recipe_instruction</node>
+    <node x="405.7621082621083" y="-115.67663817663816">a0c4049d-0875-4db7-bac3-00dcd91bbfd4.TABLE:recipe_assignment.ingredient</node>
+    <node x="61.539886039886056" y="397.52849002849">a0c4049d-0875-4db7-bac3-00dcd91bbfd4.TABLE:recipe_assignment.recipe_category</node>
+    <node x="339.03846153846155" y="119.26495726495725">a0c4049d-0875-4db7-bac3-00dcd91bbfd4.TABLE:recipe_assignment.recipe_ingredient</node>
+    <node x="9.141025641025635" y="199.0">a0c4049d-0875-4db7-bac3-00dcd91bbfd4.TABLE:recipe_assignment.recipe_recipe_category</node>
+    <node x="-10.858974358974365" y="49.99715099715101">a0c4049d-0875-4db7-bac3-00dcd91bbfd4.TABLE:recipe_assignment.recipe</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="a0c4049d-0875-4db7-bac3-00dcd91bbfd4.TABLE:recipe_assignment.recipe_ingredient" target="a0c4049d-0875-4db7-bac3-00dcd91bbfd4.TABLE:recipe_assignment.ingredient" relationship="REFERENCES">
+      <point x="39.0" y="-72.5" />
+      <point x="456.03846153846155" y="255.0" />
+      <point x="503.2621082621083" y="255.0" />
+      <point x="0.0" y="39.5" />
+    </edge>
+    <edge source="a0c4049d-0875-4db7-bac3-00dcd91bbfd4.TABLE:recipe_assignment.recipe" target="a0c4049d-0875-4db7-bac3-00dcd91bbfd4.TABLE:recipe_assignment.recipe_instruction" relationship="REFERENCES">
+      <point x="0.0" y="-50.5" />
+      <point x="105.64102564102564" y="104.0" />
+      <point x="81.42022792022794" y="104.0" />
+      <point x="0.0" y="39.5" />
+    </edge>
+    <edge source="a0c4049d-0875-4db7-bac3-00dcd91bbfd4.TABLE:recipe_assignment.recipe_ingredient" target="a0c4049d-0875-4db7-bac3-00dcd91bbfd4.TABLE:recipe_assignment.recipe" relationship="REFERENCES">
+      <point x="-39.0" y="-72.5" />
+      <point x="378.03846153846155" y="150.997150997151" />
+      <point x="0.0" y="50.5" />
+    </edge>
+    <edge source="a0c4049d-0875-4db7-bac3-00dcd91bbfd4.TABLE:recipe_assignment.recipe_recipe_category" target="a0c4049d-0875-4db7-bac3-00dcd91bbfd4.TABLE:recipe_assignment.recipe" relationship="REFERENCES">
+      <point x="48.25" y="-39.0" />
+      <point x="153.89102564102564" y="150.997150997151" />
+      <point x="0.0" y="50.5" />
+    </edge>
+    <edge source="a0c4049d-0875-4db7-bac3-00dcd91bbfd4.TABLE:recipe_assignment.recipe_recipe_category" target="a0c4049d-0875-4db7-bac3-00dcd91bbfd4.TABLE:recipe_assignment.recipe_category" relationship="REFERENCES">
+      <point x="-48.25" y="-39.0" />
+      <point x="138.53988603988606" y="199.0" />
+      <point x="0.0" y="39.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="0.7922818791946309" showDependencies="false" x="341.80555555555554" y="222.78490028490023" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Columns</Category>
+    <Category>Comments</Category>
+    <Category>Key columns</Category>
+    <Category>Virtual foreign keys</Category>
+  </Categories>
+</Diagram>
+
