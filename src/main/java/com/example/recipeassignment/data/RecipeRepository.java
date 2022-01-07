@@ -9,11 +9,10 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 @Repository
 public interface RecipeRepository extends JpaRepository<Recipe, Integer> {
     @Query("SELECT r FROM Recipe r WHERE UPPER(r.recipeName) LIKE UPPER(CONCAT('%', :name, '%'))")
-    Optional<Recipe> findByRecipeNameContains(@Param("name") String name);
+    List<Recipe> findByRecipeNameContains(@Param("name") String name);
     @Query("SELECT r FROM Recipe r, RecipeIngredient ri, Ingredient i WHERE i = ri.ingredient AND ri MEMBER OF r.ingredients AND i.ingredientName = :name")
     List<Recipe> findByIngredientName(@Param("name") String name);
     @Query("SELECT r FROM Recipe r JOIN r.categories c WHERE UPPER(c.category) =:category")

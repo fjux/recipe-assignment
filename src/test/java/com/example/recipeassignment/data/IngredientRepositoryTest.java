@@ -21,8 +21,6 @@ class IngredientRepositoryTest {
     private static final String INGREDIENT_6 = "Flounder";
     @Autowired
     private IngredientRepository testObject;
-    @Autowired
-    private TestEntityManager em;
 
 
     private Ingredient ingredient1 = new Ingredient(INGREDIENT_1);
@@ -52,5 +50,8 @@ class IngredientRepositoryTest {
 
     @Test
     void findByIngredientNameContains() {
+        int expectedResult = 2;
+        assertEquals(expectedResult, (long) testObject.findByIngredientNameContains("Mi").size());
+        assertEquals(expectedResult, testObject.findByIngredientNameContains("Flou").size());
     }
 }

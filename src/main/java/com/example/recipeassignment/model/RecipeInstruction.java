@@ -20,8 +20,7 @@ public class RecipeInstruction {
     private String id;
     private String instructions;
 
-    public RecipeInstruction(String id, String instructions) {
-        this.id = id;
+    public RecipeInstruction(String instructions) {
         this.instructions = instructions;
     }
 

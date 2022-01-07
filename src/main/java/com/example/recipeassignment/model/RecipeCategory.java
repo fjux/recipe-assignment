@@ -22,8 +22,7 @@ public class RecipeCategory {
     public RecipeCategory() {
     }
 
-    public RecipeCategory(int recipeCategoryId, String category, Set<Recipe> recipes) {
-        this.recipeCategoryId = recipeCategoryId;
+    public RecipeCategory(String category, Set<Recipe> recipes) {
         this.category = category;
         this.recipes = recipes;
     }
