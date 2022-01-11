@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import java.util.Objects;
+
 import static com.example.recipeassignment.model.constants.EntityConstants.GENERATOR;
 import static com.example.recipeassignment.model.constants.EntityConstants.UUID_GENERATOR;
 
@@ -15,7 +17,7 @@ import static com.example.recipeassignment.model.constants.EntityConstants.UUID_
 public class RecipeInstruction {
     @Id
     @GeneratedValue(generator = GENERATOR)
-    @GenericGenerator(name =GENERATOR, strategy = UUID_GENERATOR)
+    @GenericGenerator(name = GENERATOR, strategy = UUID_GENERATOR)
     @Column(updatable = false)
     private String id;
     private String instructions;
@@ -41,5 +43,18 @@ public class RecipeInstruction {
 
     public void setInstructions(String instructions) {
         this.instructions = instructions;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof RecipeInstruction)) return false;
+        RecipeInstruction that = (RecipeInstruction) o;
+        return getId().equals(that.getId()) && Objects.equals(getInstructions(), that.getInstructions());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getInstructions());
     }
 }

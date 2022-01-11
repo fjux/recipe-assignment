@@ -1,6 +1,7 @@
 package com.example.recipeassignment.model;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 public class Ingredient {
@@ -34,5 +35,24 @@ public class Ingredient {
         this.ingredientName = ingredientName;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Ingredient)) return false;
+        Ingredient that = (Ingredient) o;
+        return getIngredientId() == that.getIngredientId() && getIngredientName().equals(that.getIngredientName());
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(getIngredientId(), getIngredientName());
+    }
+
+    @Override
+    public String toString() {
+        return "Ingredient{" +
+                "ingredientId=" + ingredientId +
+                ", ingredientName='" + ingredientName + '\'' +
+                '}';
+    }
 }

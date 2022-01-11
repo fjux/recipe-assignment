@@ -5,6 +5,8 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
+import java.util.Objects;
+
 import static com.example.recipeassignment.model.constants.EntityConstants.GENERATOR;
 import static com.example.recipeassignment.model.constants.EntityConstants.UUID_GENERATOR;
 
@@ -72,5 +74,29 @@ public class RecipeIngredient {
 
     public void setRecipe(Recipe recipe) {
         this.recipe = recipe;
+    }
+
+    @Override
+    public String toString() {
+        return "RecipeIngredient{" +
+                "recipeIngredientId='" + recipeIngredientId + '\'' +
+                ", ingredient=" + ingredient.getIngredientName() +
+                ", amount=" + amount +
+                ", measurement=" + measurement +
+                ", recipe=" + recipe.getRecipeName() +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof RecipeIngredient)) return false;
+        RecipeIngredient that = (RecipeIngredient) o;
+        return getRecipeIngredientId().equals(that.getRecipeIngredientId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getRecipeIngredientId());
     }
 }
