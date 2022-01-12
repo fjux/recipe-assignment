@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 public class RecipeCategory {
@@ -64,19 +65,13 @@ public class RecipeCategory {
     public void addRecipe(Recipe recipe) {
         if (recipe == null) throw new IllegalArgumentException("Recipe was null");
         if (recipes == null) recipes = new HashSet<>();
-        if (!recipes.contains(recipe)) {
-            recipes.add(recipe);
-            recipe.addRecipeCategory(this);
-        }
+        recipes.add(recipe);
     }
 
     public void removeRecipe(Recipe recipe) {
         if (recipe == null) throw new IllegalArgumentException("Recipe was null");
         if (recipes == null) recipes = new HashSet<>();
-        if (recipes.contains(recipe)) {
-            recipes.remove(recipe);
-            recipe.removeRecipeCategory(this);
-        }
+        recipes.remove(recipe);
     }
 
     @Override
@@ -84,7 +79,7 @@ public class RecipeCategory {
         return "RecipeCategory{" +
                 "recipeCategoryId=" + recipeCategoryId +
                 ", category='" + category + '\'' +
-                ", recipes=" + recipes.stream().map(Recipe::getRecipeName).toString() +
+                ", recipes=" + recipes.stream().map(Recipe::getRecipeName).collect(Collectors.toList())+
                 '}';
     }
 

@@ -2,6 +2,7 @@ package com.example.recipeassignment.model;
 
 import javax.persistence.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Entity
 public class Recipe {
@@ -60,8 +61,7 @@ public class Recipe {
         if (ingredients.isEmpty()){
             if (this.ingredients != null){
                 this.ingredients.forEach(recipeIngredient -> recipeIngredient.setRecipe(this));
-            }
-            else {
+            }else {
                 ingredients.forEach(recipeIngredient -> recipeIngredient.setRecipe(this));
             }
         }
@@ -87,8 +87,7 @@ public class Recipe {
         if (categories.isEmpty()){
             if (this.categories != null){
                 this.categories.forEach(recipeCategory -> recipeCategory.addRecipe(null));
-            }
-            else {
+            }else {
                 categories.forEach(recipeCategory -> recipeCategory.addRecipe(this));
             }
         }
@@ -138,7 +137,7 @@ public class Recipe {
                 ", recipeName='" + recipeName + '\'' +
                 ", ingredients=" + ingredients +
                 ", instruction=" + instruction +
-                ", categories=" + categories.stream().map(RecipeCategory::getCategory).toString() +
+                ", categories=" + categories.stream().map(RecipeCategory::getCategory).collect(Collectors.toList()) +
                 '}';
     }
 
