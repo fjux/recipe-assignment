@@ -6,14 +6,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 @DataJpaTest
-
+@Transactional
 class RecipeRepositoryTest {
 
     private static final String INGREDIENT_1 = "Milk";
@@ -31,26 +30,21 @@ class RecipeRepositoryTest {
     private static final String INSTRUCTION_2 = "Chop vegetables and throw into boiling water";
     private static final String INSTRUCTION_3 = "Make a dough and put into oven";
 
-    private RecipeInstruction recipeInstruction1, recipeInstruction2, recipeInstruction3;
+    private Ingredient ingredient1 = new Ingredient(INGREDIENT_1);
+    private Ingredient ingredient2 = new Ingredient(INGREDIENT_2);
+    private Ingredient ingredient3 = new Ingredient(INGREDIENT_3);
+    private Ingredient ingredient4 = new Ingredient(INGREDIENT_4);
+    private Ingredient ingredient5 = new Ingredient(INGREDIENT_5);
+    private Ingredient ingredient6 = new Ingredient(INGREDIENT_6);
 
-    private Ingredient ingredient1, ingredient2, ingredient3, ingredient4, ingredient5, ingredient6;
+    private RecipeInstruction recipeInstruction1, recipeInstruction2, recipeInstruction3;
 
     private RecipeCategory recipeCategory1, recipeCategory2,recipeCategory3;
 
-    private RecipeIngredient recipeIngredient1, recipeIngredient2, recipeIngredient3, recipeIngredient4, recipeIngredient5, recipeIngredient6;
+    private RecipeIngredient recipeIngredient1, recipeIngredient2, recipeIngredient3, recipeIngredient4, recipeIngredient5, recipeIngredient6, recipeIngredient7, recipeIngredient8;
 
-    private Recipe recipe1, recipe2, recipe3, recipe4, recipe5;
+    private Recipe recipe1, recipe2, recipe3, recipe4;
 
-    private Set<RecipeCategory> categories1 = new HashSet<>();
-    private Set<RecipeCategory> categories2 = new HashSet<>();
-    private Set<RecipeCategory> categories3 = new HashSet<>();
-    private Set<RecipeIngredient> ingredients1 = new HashSet<>();
-    private Set<RecipeIngredient> ingredients2 = new HashSet<>();
-    private Set<RecipeIngredient> ingredients3 = new HashSet<>();
-    private Set<RecipeIngredient> ingredients4 = new HashSet<>();
-    private Set<Recipe> recipes = new HashSet<>();
-    private Set<Recipe> recipes1 = new HashSet<>();
-    private Set<Recipe> recipes2 = new HashSet<>();
 
     @Autowired
     private RecipeRepository testObject;
@@ -64,43 +58,37 @@ class RecipeRepositoryTest {
     @Autowired
     private RecipeInstructionRepository recipeInstructionRepository;
 
+    @Autowired
+    private RecipeCategoryRepository recipeCategoryRepository;
+
 
 
     @BeforeEach
     void setUp() {
-        ingredient1 = new Ingredient(INGREDIENT_1);
-        ingredient2 = new Ingredient(INGREDIENT_2);
-        ingredient3 = new Ingredient(INGREDIENT_3);
-        ingredient4 = new Ingredient(INGREDIENT_4);
-        ingredient5 = new Ingredient(INGREDIENT_5);
-        ingredient6 = new Ingredient(INGREDIENT_6);
+
         ingredient1 = ingredientRepository.save(ingredient1);
-        ingredient3 = ingredientRepository.save(ingredient2);
-        ingredient2 = ingredientRepository.save(ingredient3);
+        ingredient2 = ingredientRepository.save(ingredient2);
+        ingredient3 = ingredientRepository.save(ingredient3);
         ingredient4 = ingredientRepository.save(ingredient4);
         ingredient5 = ingredientRepository.save(ingredient5);
         ingredient6 = ingredientRepository.save(ingredient6);
 
         recipeIngredient1 = new RecipeIngredient(ingredient1, 10.0, Measurement.DL,recipe1);
-        recipeIngredient2 = new RecipeIngredient(ingredient2, 5.0, Measurement.DL,recipe2);
-        recipeIngredient3 = new RecipeIngredient(ingredient3, 150.0, Measurement.G,recipe3);
-        recipeIngredient4 = new RecipeIngredient(ingredient4, 1.0, Measurement.DL,recipe4);
-        recipeIngredient5 = new RecipeIngredient(ingredient5, 10.0, Measurement.DL,recipe5);
-        recipeIngredient6 = new RecipeIngredient(ingredient6, 1.5, Measurement.KG,recipe1);
+        recipeIngredient2 = new RecipeIngredient(ingredient2, 5.0, Measurement.DL,recipe1);
+        recipeIngredient3 = new RecipeIngredient(ingredient3, 150.0, Measurement.G,recipe2);
+        recipeIngredient4 = new RecipeIngredient(ingredient4, 1.0, Measurement.DL,recipe2);
+        recipeIngredient5 = new RecipeIngredient(ingredient2, 10.0, Measurement.DL,recipe3);
+        recipeIngredient6 = new RecipeIngredient(ingredient6, 1.5, Measurement.KG,recipe3);
+        recipeIngredient7 = new RecipeIngredient(ingredient1, 5.0, Measurement.DL, recipe4);
+        recipeIngredient8 = new RecipeIngredient(ingredient4, 5.0, Measurement.DL, recipe4);
         recipeIngredient1 = recipeIngredientRepository.save(recipeIngredient1);
         recipeIngredient2 = recipeIngredientRepository.save(recipeIngredient2);
         recipeIngredient3 = recipeIngredientRepository.save(recipeIngredient3);
         recipeIngredient4 = recipeIngredientRepository.save(recipeIngredient4);
         recipeIngredient5 = recipeIngredientRepository.save(recipeIngredient5);
         recipeIngredient6 = recipeIngredientRepository.save(recipeIngredient6);
-        ingredients1.add(recipeIngredient1);
-        ingredients1.add(recipeIngredient2);
-        ingredients2.add(recipeIngredient3);
-        ingredients2.add(recipeIngredient4);
-        ingredients3.add(recipeIngredient5);
-        ingredients3.add(recipeIngredient6);
-        ingredients4.add(recipeIngredient1);
-        ingredients4.add(recipeIngredient6);
+        recipeIngredient7 = recipeIngredientRepository.save(recipeIngredient7);
+        recipeIngredient8 = recipeIngredientRepository.save(recipeIngredient8);
 
         recipeInstruction1 = new RecipeInstruction(INSTRUCTION_1);
         recipeInstruction2 = new RecipeInstruction(INSTRUCTION_2);
@@ -109,56 +97,71 @@ class RecipeRepositoryTest {
         recipeInstruction2 = recipeInstructionRepository.save(recipeInstruction2);
         recipeInstruction3 = recipeInstructionRepository.save(recipeInstruction3);
 
-        recipeCategory1 = new RecipeCategory(CATEGORY_1, recipes);
-        recipeCategory2 = new RecipeCategory(CATEGORY_2, recipes1);
-        recipeCategory3 = new RecipeCategory(CATEGORY_3, recipes2);
-        categories1.add(recipeCategory1);
-        categories1.add(recipeCategory2);
-        categories2.add(recipeCategory3);
-        categories2.add(recipeCategory1);
-        categories3.add(recipeCategory3);
-        categories3.add(recipeCategory2);
+        recipe1 = new Recipe("Pancake", recipeInstruction1);
+        recipe2 = new Recipe("Miso soup", recipeInstruction2);
+        recipe3 = new Recipe("Fish soup", recipeInstruction3);
+        recipe4 = new Recipe("Stuffed rabbit", recipeInstruction1);
 
-        recipe1 = new Recipe("Pancake",ingredients1, recipeInstruction1, categories1);
-        recipe2 = new Recipe("Miso soup",ingredients2, recipeInstruction2, categories2);
-        recipe3 = new Recipe("Fish soup",ingredients3, recipeInstruction3, categories3);
-        recipe4 = new Recipe("Stuffed rabbit",ingredients4, recipeInstruction1, categories2);
-        recipe5 = new Recipe("Burning beef",ingredients2, recipeInstruction3, categories1);
+        recipeCategory1 = new RecipeCategory(CATEGORY_1);
+        recipeCategory2 = new RecipeCategory(CATEGORY_2);
+        recipeCategory3 = new RecipeCategory(CATEGORY_3);
+        recipeCategory1 = recipeCategoryRepository.save(recipeCategory1);
+        recipeCategory2 = recipeCategoryRepository.save(recipeCategory2);
+        recipeCategory3 = recipeCategoryRepository.save(recipeCategory3);
+
+
+        recipe1.addRecipeIngredient(recipeIngredient1);
+        recipe1.addRecipeIngredient(recipeIngredient2);
+        recipe2.addRecipeIngredient(recipeIngredient3);
+        recipe2.addRecipeIngredient(recipeIngredient4);
+        recipe3.addRecipeIngredient(recipeIngredient5);
+        recipe3.addRecipeIngredient(recipeIngredient6);
+        recipe4.addRecipeIngredient(recipeIngredient7);
+        recipe4.addRecipeIngredient(recipeIngredient8);
+        recipe1.addRecipeCategory(recipeCategory1);
+        recipe1.addRecipeCategory(recipeCategory2);
+        recipe2.addRecipeCategory(recipeCategory3);
+        recipe3.addRecipeCategory(recipeCategory3);
+        recipe4.addRecipeCategory(recipeCategory2);
+
         recipe1 = testObject.save(recipe1);
         recipe2 = testObject.save(recipe2);
         recipe3 = testObject.save(recipe3);
         recipe4 = testObject.save(recipe4);
-        recipe5 = testObject.save(recipe5);
-        recipes.add(recipe1);
-        recipes.add(recipe2);
-        recipes.add(recipe5);
-        recipes1.add(recipe2);
-        recipes1.add(recipe3);
-        recipes1.add(recipe4);
-        recipes2.add(recipe5);
-        recipes2.add(recipe4);
-        recipes2.add(recipe1);
+
 
 
     }
 
+
+
     @Test
     void findByRecipeNameContains() {
-        assertEquals(2, testObject.findByRecipeNameContains("SoUp").size());
-        assertEquals(4, testObject.findByRecipeNameContains("U").size());
+        assertEquals(1, testObject.findByRecipeNameContains("Pancake").size());
+        assertEquals(3, testObject.findByRecipeNameContains("u").size());
+
     }
 
     @Test
     void findByIngredientName() {
-        assertEquals(2, testObject.findByIngredientName(INGREDIENT_6));
+        List<Recipe> testList;
+        testList = testObject.findByIngredientName("Milk");
+        assertEquals(2, testList.size());
     }
 
     @Test
     void findByCategory() {
-        ;
+        System.out.println(recipeCategory2);
+        assertEquals(2, testObject.findByCategory("Meal").size());
     }
 
     @Test
     void findByCategories() {
+        List<Recipe> recipeList;
+        recipeList= testObject.findByCategories("Mexican", "Indian", "Meal", "Dessert", "Swedish", "Blood");
+        System.out.println(recipeList);
+        assertEquals(2, recipeList.size());
+
+
     }
 }
