@@ -1,4 +1,4 @@
-package com.example.recipeassignment.model;
+package com.example.recipeassignment.model.entity;
 
 import com.example.recipeassignment.model.constants.Measurement;
 import org.hibernate.annotations.GenericGenerator;

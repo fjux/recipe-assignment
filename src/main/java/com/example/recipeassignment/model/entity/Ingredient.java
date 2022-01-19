@@ -1,4 +1,4 @@
-package com.example.recipeassignment.model;
+package com.example.recipeassignment.model.entity;
 
 import javax.persistence.*;
 import java.util.Objects;
