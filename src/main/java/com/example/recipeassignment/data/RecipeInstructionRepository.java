@@ -1,6 +1,6 @@
 package com.example.recipeassignment.data;
 
-import com.example.recipeassignment.model.RecipeInstruction;
+import com.example.recipeassignment.model.entity.RecipeInstruction;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

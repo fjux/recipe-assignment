@@ -1,7 +1,7 @@
 package com.example.recipeassignment.data;
 
-import com.example.recipeassignment.model.*;
 import com.example.recipeassignment.model.constants.Measurement;
+import com.example.recipeassignment.model.entity.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

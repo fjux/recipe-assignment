@@ -5,6 +5,7 @@ import com.example.recipeassignment.data.RecipeCategoryRepository;
 import com.example.recipeassignment.data.RecipeIngredientRepository;
 import com.example.recipeassignment.data.RecipeRepository;
 import com.example.recipeassignment.model.constants.Measurement;
+import com.example.recipeassignment.model.entity.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
