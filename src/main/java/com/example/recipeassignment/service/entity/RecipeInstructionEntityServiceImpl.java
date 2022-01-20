@@ -3,12 +3,19 @@ package com.example.recipeassignment.service.entity;
 import com.example.recipeassignment.data.RecipeInstructionRepository;
 import com.example.recipeassignment.model.dto.form.RecipeInstructionForm;
 import com.example.recipeassignment.model.entity.RecipeInstruction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
+@Service
+@Transactional
 
 public class RecipeInstructionEntityServiceImpl implements RecipeInstructionEntityService{
     private final RecipeInstructionRepository recipeInstructionRepository;
 
+    @Autowired
     public RecipeInstructionEntityServiceImpl(RecipeInstructionRepository recipeInstructionRepository) {
         this.recipeInstructionRepository = recipeInstructionRepository;
     }

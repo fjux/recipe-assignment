@@ -4,6 +4,7 @@ import com.example.recipeassignment.data.RecipeCategoryRepository;
 import com.example.recipeassignment.model.dto.form.RecipeCategoryForm;
 import com.example.recipeassignment.model.entity.Recipe;
 import com.example.recipeassignment.model.entity.RecipeCategory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,6 +14,7 @@ import java.util.List;
 public class RecipeCategoryEntityServiceImpl implements RecipeCategoryEntityService{
     private final RecipeCategoryRepository recipeCategoryRepository;
 
+    @Autowired
     public RecipeCategoryEntityServiceImpl(RecipeCategoryRepository recipeCategoryRepository) {
         this.recipeCategoryRepository = recipeCategoryRepository;
     }

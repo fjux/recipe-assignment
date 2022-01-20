@@ -1,18 +1,26 @@
 package com.example.recipeassignment.service.entity;
 
-import com.example.recipeassignment.data.IngredientRepository;
 import com.example.recipeassignment.data.RecipeIngredientRepository;
-import com.example.recipeassignment.data.RecipeRepository;
 import com.example.recipeassignment.model.dto.form.RecipeIngredientForm;
 import com.example.recipeassignment.model.entity.RecipeIngredient;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Service
+@Transactional
+
 public class RecipeIngredientEntityServiceImpl implements RecipeIngredientEntityService{
+
     private final RecipeIngredientRepository recipeIngredientRepository;
+
     private final IngredientEntityService ingredientEntityService;
+
     private final RecipeEntityService recipeEntityService;
 
+    @Autowired
     public RecipeIngredientEntityServiceImpl(RecipeIngredientRepository recipeIngredientRepository, IngredientEntityService ingredientEntityService, RecipeEntityService recipeEntityService) {
         this.recipeIngredientRepository = recipeIngredientRepository;
         this.ingredientEntityService = ingredientEntityService;

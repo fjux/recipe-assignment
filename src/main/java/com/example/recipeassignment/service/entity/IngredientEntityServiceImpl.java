@@ -3,6 +3,7 @@ package com.example.recipeassignment.service.entity;
 import com.example.recipeassignment.data.IngredientRepository;
 import com.example.recipeassignment.model.dto.form.IngredientForm;
 import com.example.recipeassignment.model.entity.Ingredient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,6 +14,7 @@ import java.util.Optional;
 public class IngredientEntityServiceImpl implements IngredientEntityService {
     private final IngredientRepository ingredientRepository;
 
+    @Autowired
     public IngredientEntityServiceImpl(IngredientRepository ingredientRepository) {
         this.ingredientRepository = ingredientRepository;
     }
