@@ -4,17 +4,17 @@ import com.example.recipeassignment.model.constants.Measurement;
 
 import java.io.Serializable;
 
-public class RecipeIngredientDto implements Serializable {
+public class RecipeIngredientDTO implements Serializable {
     private String recipeIngredientId;
-    private IngredientDto ingredient;
+    private IngredientDTO ingredient;
     private double amount;
     private Measurement measurement;
-    private RecipeDto recipe;
+    private RecipeDTO recipe;
 
-    public RecipeIngredientDto() {
+    public RecipeIngredientDTO() {
     }
 
-    public RecipeIngredientDto(String recipeIngredientId, IngredientDto ingredient, double amount, Measurement measurement, RecipeDto recipe) {
+    public RecipeIngredientDTO(String recipeIngredientId, IngredientDTO ingredient, double amount, Measurement measurement, RecipeDTO recipe) {
         this.recipeIngredientId = recipeIngredientId;
         this.ingredient = ingredient;
         this.amount = amount;
@@ -46,19 +46,19 @@ public class RecipeIngredientDto implements Serializable {
         this.measurement = measurement;
     }
 
-    public IngredientDto getIngredient() {
+    public IngredientDTO getIngredient() {
         return ingredient;
     }
 
-    public void setIngredient(IngredientDto ingredient) {
+    public void setIngredient(IngredientDTO ingredient) {
         this.ingredient = ingredient;
     }
 
-    public RecipeDto getRecipe() {
+    public RecipeDTO getRecipe() {
         return recipe;
     }
 
-    public void setRecipe(RecipeDto recipe) {
+    public void setRecipe(RecipeDTO recipe) {
         this.recipe = recipe;
     }
 }

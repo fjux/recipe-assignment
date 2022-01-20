@@ -3,18 +3,18 @@ package com.example.recipeassignment.model.dto.view;
 import java.io.Serializable;
 import java.util.Set;
 
-public class RecipeCategoryDto implements Serializable {
+public class RecipeCategoryDTO implements Serializable {
     private int recipeCategoryId;
     private String category;
-    private Set<RecipeDto> recipeDtos;
+    private Set<RecipeDTO> recipeDTOS;
 
-    public RecipeCategoryDto(int recipeCategoryId, String category, Set<RecipeDto> recipeDtos) {
+    public RecipeCategoryDTO(int recipeCategoryId, String category, Set<RecipeDTO> recipeDTOS) {
         this.recipeCategoryId = recipeCategoryId;
         this.category = category;
-        this.recipeDtos= recipeDtos;
+        this.recipeDTOS = recipeDTOS;
     }
 
-    public RecipeCategoryDto() {
+    public RecipeCategoryDTO() {
     }
 
     public int getRecipeCategoryId() {
@@ -33,11 +33,11 @@ public class RecipeCategoryDto implements Serializable {
         this.category = category;
     }
 
-    public Set<RecipeDto> getRecipeDtos() {
-        return recipeDtos;
+    public Set<RecipeDTO> getRecipeDTOS() {
+        return recipeDTOS;
     }
 
-    public void setRecipeDtos(Set<RecipeDto> recipeDtos) {
-        this.recipeDtos = recipeDtos;
+    public void setRecipeDTOS(Set<RecipeDTO> recipeDTOS) {
+        this.recipeDTOS = recipeDTOS;
     }
 }

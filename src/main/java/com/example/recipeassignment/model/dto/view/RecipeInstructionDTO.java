@@ -2,16 +2,16 @@ package com.example.recipeassignment.model.dto.view;
 
 import java.io.Serializable;
 
-public class RecipeInstructionDto implements Serializable {
+public class RecipeInstructionDTO implements Serializable {
     private String id;
     private String instruction;
 
-    public RecipeInstructionDto(String id, String instruction) {
+    public RecipeInstructionDTO(String id, String instruction) {
         this.id = id;
         this.instruction = instruction;
     }
 
-    public RecipeInstructionDto() {
+    public RecipeInstructionDTO() {
     }
 
     public String getId() {

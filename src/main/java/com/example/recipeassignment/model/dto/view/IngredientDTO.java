@@ -2,16 +2,16 @@ package com.example.recipeassignment.model.dto.view;
 
 import java.io.Serializable;
 
-public class IngredientDto implements Serializable {
+public class IngredientDTO implements Serializable {
     private int ingredientId;
     private String ingredientName;
 
-    public IngredientDto(int ingredientId, String ingredientName) {
+    public IngredientDTO(int ingredientId, String ingredientName) {
         this.ingredientId = ingredientId;
         this.ingredientName = ingredientName;
     }
 
-    public IngredientDto() {
+    public IngredientDTO() {
     }
 
     public int getIngredientId() {
