@@ -6,7 +6,7 @@ public class RecipeForm implements Serializable {
 
     private int recipeId;
     private String recipeName;
-    private RecipeInstructionForm recipeInstructionForm;
+    private RecipeInstructionForm recipeInstruction;
 
     public RecipeForm() {
     }
@@ -27,11 +27,11 @@ public class RecipeForm implements Serializable {
         this.recipeName = recipeName;
     }
 
-    public RecipeInstructionForm getRecipeInstructionForm() {
-        return recipeInstructionForm;
+    public RecipeInstructionForm getRecipeInstruction() {
+        return recipeInstruction;
     }
 
-    public void setRecipeInstructionForm(RecipeInstructionForm recipeInstructionForm) {
-        this.recipeInstructionForm = recipeInstructionForm;
+    public void setRecipeInstructionForm(RecipeInstructionForm recipeInstruction) {
+        this.recipeInstruction = recipeInstruction;
     }
 }
