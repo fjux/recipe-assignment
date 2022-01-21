@@ -1,22 +1,22 @@
 package com.example.recipeassignment.service.facade;
 
-import com.example.recipeassignment.model.dto.form.*;
 import com.example.recipeassignment.model.dto.view.*;
+import com.example.recipeassignment.model.entity.*;
 
 public interface DTOService {
-    IngredientDTO toIngredientDTO(IngredientForm ingredient);
+    IngredientDTO toIngredientDTO(Ingredient ingredient);
 
-    RecipeInstructionDTO toRecipeInstructionDTO(RecipeInstructionForm recipeInstruction);
+    RecipeInstructionDTO toRecipeInstructionDTO(RecipeInstruction recipeInstruction);
 
-    RecipeIngredientDTO toSmallRecipeIngredientDTO(RecipeIngredientForm recipeIngredient);
+    RecipeIngredientDTO toSmallRecipeIngredientDTO(RecipeIngredient recipeIngredient);
 
-    RecipeIngredientDTO toFullRecipeIngredientDTO(RecipeIngredientForm recipeIngredient);
+    RecipeIngredientDTO toFullRecipeIngredientDTO(RecipeIngredient recipeIngredient);
 
-    RecipeCategoryDTO toSmallRecipeCategoryDTO(RecipeCategoryForm recipeCategory);
+    RecipeCategoryDTO toSmallRecipeCategoryDTO(RecipeCategory recipeCategory);
 
-    RecipeCategoryDTO toFullRecipeCategoryDTO(RecipeCategoryForm recipeCategory);
+    RecipeCategoryDTO toFullRecipeCategoryDTO(RecipeCategory recipeCategory);
 
-    RecipeDTO toSmallRecipeDTO(RecipeForm recipe);
+    RecipeDTO toSmallRecipeDTO(Recipe recipe);
 
-    RecipeDTO foFullRecipeDTO(RecipeForm recipe);
+    RecipeDTO toFullRecipeDTO(Recipe recipe);
 }

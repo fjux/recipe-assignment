@@ -2,48 +2,52 @@ package com.example.recipeassignment.service.facade;
 
 import com.example.recipeassignment.model.dto.form.RecipeInstructionForm;
 import com.example.recipeassignment.model.dto.view.RecipeInstructionDTO;
+import com.example.recipeassignment.service.entity.RecipeInstructionEntityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
 
 public class RecipeInstructionServiceImpl implements RecipeInstructionService{
 
-    private final RecipeInstructionService recipeInstructionService;
+    private final RecipeInstructionEntityService recipeInstructionEntityService;
     private final DTOService dtoService;
 
     @Autowired
-    public RecipeInstructionServiceImpl(RecipeInstructionService recipeInstructionService, DTOService dtoService) {
-        this.recipeInstructionService = recipeInstructionService;
+    public RecipeInstructionServiceImpl(RecipeInstructionEntityService recipeInstructionEntityService, DTOService dtoService) {
+        this.recipeInstructionEntityService = recipeInstructionEntityService;
         this.dtoService = dtoService;
     }
 
     @Override
     public RecipeInstructionDTO create(RecipeInstructionForm recipeInstructionForm) {
-        return null;
+        return dtoService.toRecipeInstructionDTO(recipeInstructionEntityService.create(recipeInstructionForm));
     }
 
     @Override
-    public RecipeInstructionDTO findById(String Id) {
-        return null;
+    public RecipeInstructionDTO findById(String recipeInstructionId) {
+        return dtoService.toRecipeInstructionDTO(recipeInstructionEntityService.findById(recipeInstructionId));
     }
 
     @Override
     public List<RecipeInstructionDTO> findAll() {
-        return null;
+        return recipeInstructionEntityService.findAll().stream()
+                .map(dtoService::toRecipeInstructionDTO)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public RecipeInstructionDTO update(String s, RecipeInstructionForm recipeInstructionForm) {
-        return null;
+    public RecipeInstructionDTO update(String recipeInstructionId, RecipeInstructionForm recipeInstructionForm) {
+        return dtoService.toRecipeInstructionDTO(recipeInstructionEntityService.update(recipeInstructionId, recipeInstructionForm));
     }
 
     @Override
-    public void delete(String s) {
-
+    public void delete(String recipeInstructionId) {
+        recipeInstructionEntityService.delete(recipeInstructionId);
     }
 }
