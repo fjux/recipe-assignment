@@ -8,6 +8,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IngredientService extends GenericEntityService<IngredientDTO, IngredientForm, Integer> {
-    Optional<IngredientDTO> findByIngredientNameIgnoreCase(String ingredientName);
+    IngredientDTO findByIngredientNameIgnoreCase(String ingredientName);
     List<IngredientDTO> findByIngredientNameContains(String ingredientName);
 }

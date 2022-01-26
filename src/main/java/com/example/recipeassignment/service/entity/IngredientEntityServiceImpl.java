@@ -52,7 +52,7 @@ public class IngredientEntityServiceImpl implements IngredientEntityService {
 
 
     @Override
-    public Optional<Ingredient> findByIngredientName(String ingredientName) {
+    public Optional<Ingredient> findByIngredientNameIgnoreCase(String ingredientName) {
         return ingredientRepository.findByIngredientNameIgnoreCase(ingredientName);
     }
 
