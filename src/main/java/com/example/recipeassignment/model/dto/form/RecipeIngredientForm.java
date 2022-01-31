@@ -1,11 +1,20 @@
 package com.example.recipeassignment.model.dto.form;
 
 import com.example.recipeassignment.model.constants.Measurement;
+import com.example.recipeassignment.validation.OnPost;
+import com.example.recipeassignment.validation.OnPut;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
+import static com.example.recipeassignment.validation.messages.ValidationMessages.MANDATORY_FIELD;
+
 public class RecipeIngredientForm implements Serializable {
+
+    @NotBlank(message = MANDATORY_FIELD, groups = OnPut.class)
     private String recipeIngredientId;
+    @NotNull(message = MANDATORY_FIELD, groups = OnPost.class)
     private IngredientForm ingredient;
     private double amount;
     private Measurement measurement;

@@ -3,7 +3,10 @@ package com.example.recipeassignment.controllers;
 import com.example.recipeassignment.model.dto.form.IngredientForm;
 import com.example.recipeassignment.model.dto.view.IngredientDTO;
 import com.example.recipeassignment.service.facade.IngredientService;
+import com.example.recipeassignment.validation.OnPost;
+import com.example.recipeassignment.validation.OnPut;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,7 +22,7 @@ public class IngredientController {
 
     }
     @PostMapping("/api/v1/ingredients")
-    public ResponseEntity<IngredientDTO> create(@RequestBody IngredientForm ingredientForm) {
+    public ResponseEntity<IngredientDTO> create(@Validated(OnPost.class) @RequestBody IngredientForm ingredientForm) {
         return ResponseEntity.status(201).body(ingredientService.create(ingredientForm));
     }
 
@@ -34,7 +37,7 @@ public class IngredientController {
     }
 
     @PutMapping("/api/v1/ingredients/{id}")
-    public ResponseEntity<IngredientDTO> update( @PathVariable("id") Integer ingredientId, @RequestBody IngredientForm ingredientForm) {
+    public ResponseEntity<IngredientDTO> update( @PathVariable("id") Integer ingredientId, @Validated(OnPut.class) @RequestBody IngredientForm ingredientForm) {
         return ResponseEntity.ok(ingredientService.update(ingredientId, ingredientForm));
     }
 

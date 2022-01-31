@@ -6,7 +6,10 @@ import com.example.recipeassignment.model.dto.view.RecipeDTO;
 import com.example.recipeassignment.model.entity.RecipeCategory;
 import com.example.recipeassignment.model.entity.RecipeIngredient;
 import com.example.recipeassignment.service.facade.RecipeService;
+import com.example.recipeassignment.validation.OnPost;
+import com.example.recipeassignment.validation.OnPut;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,7 +24,7 @@ public class RecipeController {
     }
 
     @PostMapping("/api/v1/recipes")
-    public ResponseEntity<RecipeDTO> create(@RequestBody RecipeForm recipeForm){
+    public ResponseEntity<RecipeDTO> create(@Validated(OnPost.class) @RequestBody RecipeForm recipeForm){
         return ResponseEntity.status(201).body(recipeService.create(recipeForm));
     }
 
@@ -36,7 +39,7 @@ public class RecipeController {
     }
 
     @PutMapping("/api/v1/recipes/{id}")
-    public ResponseEntity<RecipeDTO> update(@PathVariable("id") Integer recipeId, @RequestBody RecipeForm recipeForm){
+    public ResponseEntity<RecipeDTO> update(@PathVariable("id") Integer recipeId, @Validated(OnPut.class) @RequestBody RecipeForm recipeForm){
         return ResponseEntity.ok(recipeService.update(recipeId, recipeForm));
     }
 
