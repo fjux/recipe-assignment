@@ -51,6 +51,11 @@ public class RecipeCategoryEntityServiceImpl implements RecipeCategoryEntityServ
     }
 
     @Override
+    public RecipeCategory findByCategoryIgnoreCase(String category) {
+        return recipeCategoryRepository.findByCategoryIgnoreCase(category).orElseThrow(() -> new IllegalArgumentException("Could not find any category called" + category));
+    }
+
+    @Override
     public RecipeCategory addRecipe(Integer recipeCategoryId, Recipe recipe) {
         if (recipe == null) throw new IllegalArgumentException("Recipe was null");
         RecipeCategory recipeCategory = recipeCategoryRepository.findById(recipeCategoryId).orElseThrow(() -> new IllegalArgumentException("Could not find a recipe category with id " + recipeCategoryId));
@@ -65,4 +70,6 @@ public class RecipeCategoryEntityServiceImpl implements RecipeCategoryEntityServ
         recipeCategory.removeRecipe(recipe);
         return recipeCategoryRepository.save(recipeCategory);
     }
+
+
 }

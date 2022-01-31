@@ -7,4 +7,5 @@ import com.example.recipeassignment.model.entity.RecipeCategory;
 public interface RecipeCategoryEntityService extends GenericEntityService<RecipeCategory, RecipeCategoryForm, Integer> {
     RecipeCategory addRecipe(Integer recipeCategoryId, Recipe recipe);
     RecipeCategory removeRecipe(Integer recipeCategoryId, Recipe recipe);
+    RecipeCategory findByCategoryIgnoreCase(String category);
 }

@@ -54,6 +54,11 @@ public class RecipeCategoryServiceImpl implements RecipeCategoryService{
     }
 
     @Override
+    public RecipeCategoryDTO findByCategoryIgnoreCase(String category) {
+        return dtoService.toSmallRecipeCategoryDTO(recipeCategoryEntityService.findByCategoryIgnoreCase(category));
+    }
+
+    @Override
     public RecipeCategoryDTO addRecipe(Integer recipeCategoryId, Recipe recipe) {
         return dtoService.toFullRecipeCategoryDTO(recipeCategoryEntityService.addRecipe(recipeCategoryId, recipe));
     }
