@@ -4,7 +4,6 @@ import com.example.recipeassignment.model.constants.Measurement;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-
 import java.util.Objects;
 
 import static com.example.recipeassignment.model.constants.EntityConstants.GENERATOR;

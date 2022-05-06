@@ -3,8 +3,6 @@ package com.example.recipeassignment.service.facade;
 import com.example.recipeassignment.model.dto.view.*;
 import com.example.recipeassignment.model.entity.*;
 
-import java.util.Optional;
-
 public interface DTOService {
     IngredientDTO toIngredientDTO(Ingredient ingredient);
 

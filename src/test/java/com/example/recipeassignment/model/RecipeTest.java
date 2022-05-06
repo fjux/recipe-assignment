@@ -13,6 +13,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 @DataJpaTest
 @Transactional
 class RecipeTest {
@@ -56,7 +57,7 @@ class RecipeTest {
 
         assertNotNull(korvStroganoff);
         korvStroganoff.addRecipeCategory(recipeCategory1);
-        assertEquals(true, korvStroganoff.getCategories().contains(recipeCategory1));
+        assertTrue(korvStroganoff.getCategories().contains(recipeCategory1));
 
 
     }
@@ -64,24 +65,24 @@ class RecipeTest {
     @Test
     void removeRecipeCategory() {
         korvStroganoff.addRecipeCategory(recipeCategory1);
-        assertEquals(true, korvStroganoff.getCategories().contains(recipeCategory1));
+        assertTrue(korvStroganoff.getCategories().contains(recipeCategory1));
         korvStroganoff.removeRecipeCategory(recipeCategory1);
-        assertEquals(false, korvStroganoff.getCategories().contains(recipeCategory1));
+        assertFalse(korvStroganoff.getCategories().contains(recipeCategory1));
     }
 
     @Test
     void addRecipeIngredient() {
         korvStroganoff.addRecipeIngredient(recipeIngredient1);
         korvStroganoff.addRecipeIngredient(recipeIngredient2);
-        assertEquals(true, korvStroganoff.getIngredients().contains(recipeIngredient1));
-        assertEquals(true, korvStroganoff.getIngredients().contains(recipeIngredient2));
+        assertTrue(korvStroganoff.getIngredients().contains(recipeIngredient1));
+        assertTrue(korvStroganoff.getIngredients().contains(recipeIngredient2));
     }
 
     @Test
     void removeRecipeIngredient() {
         korvStroganoff.addRecipeIngredient(recipeIngredient1);
-        assertEquals(true, korvStroganoff.getIngredients().contains(recipeIngredient1));
+        assertTrue(korvStroganoff.getIngredients().contains(recipeIngredient1));
         korvStroganoff.removeRecipeIngredient(recipeIngredient1);
-        assertEquals(false, korvStroganoff.getIngredients().contains(recipeIngredient1));
+        assertFalse(korvStroganoff.getIngredients().contains(recipeIngredient1));
     }
 }
