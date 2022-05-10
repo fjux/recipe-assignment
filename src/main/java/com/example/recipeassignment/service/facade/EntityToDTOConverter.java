@@ -105,4 +105,18 @@ public class EntityToDTOConverter implements DTOService{
         recipeDTO.setRecipeIngredientDtos(recipeIngredientDTOS);
         return recipeDTO;
     }
+
+    @Override
+    public AppUserDTO toFullAppUserDTO(AppUser appUser) {
+        if(appUser == null) return null;
+        AppUserDTO appUserDTO = new AppUserDTO();
+        appUserDTO.setAppUserDTOId(appUser.getUserId());
+        appUserDTO.setUsername(appUser.getUsername());
+        appUserDTO.setRoles(
+                appUser.getRoles().stream()
+                        .map(AppRole::getUserRole)
+                        .collect(Collectors.toList())
+        );
+        return appUserDTO;
+    }
 }

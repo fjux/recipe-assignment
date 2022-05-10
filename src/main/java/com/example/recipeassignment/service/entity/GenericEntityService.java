@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface GenericEntityService <T, FORM, ID> {
     T create(FORM form);
-    T findById(ID Id);
+    T findById(ID id);
     List<T> findAll();
     T update(ID id, FORM form);
     void delete(ID id);

@@ -19,4 +19,6 @@ public interface DTOService {
     RecipeDTO toSmallRecipeDTO(Recipe recipe);
 
     RecipeDTO toFullRecipeDTO(Recipe recipe);
+
+    AppUserDTO toFullAppUserDTO(AppUser appUser);
 }

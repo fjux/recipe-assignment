@@ -52,8 +52,8 @@ public class IngredientController {
         return ResponseEntity.ok(ingredientService.findByIngredientNameIgnoreCase(ingredientName));
     }
 
-    @GetMapping("/api/v1/ingredients/{name}")
-    public ResponseEntity<List<IngredientDTO>> findByNameContains(@PathVariable("name") String ingredientName){
+    @GetMapping("/api/v1/ingredients/{contains}")
+    public ResponseEntity<List<IngredientDTO>> findByNameContains(@PathVariable("contains") String ingredientName){
         return ResponseEntity.ok(ingredientService.findByIngredientNameContains(ingredientName));
     }
 
