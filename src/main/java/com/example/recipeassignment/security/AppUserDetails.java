@@ -1,30 +1,31 @@
 package com.example.recipeassignment.security;
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.Set;
 
 public class AppUserDetails implements UserDetails, Serializable {
 
     private String userId;
     private String username;
     private String password;
-    private boolean active;
-    private Set<SimpleGrantedAuthority> authorities;
+    private String email;
+    private boolean notSuspended;
+    private Collection<GrantedAuthority> authorities;
 
     public AppUserDetails(String userId,
                           String username,
                           String password,
-                          boolean active,
-                          Set<SimpleGrantedAuthority> authorities) {
+                          String email,
+                          boolean notSuspended,
+                          Collection<GrantedAuthority> authorities) {
         this.userId = userId;
         this.username = username;
         this.password = password;
-        this.active = active;
+        this.email = email;
+        this.notSuspended = notSuspended;
         this.authorities = authorities;
     }
 
@@ -47,11 +48,19 @@ public class AppUserDetails implements UserDetails, Serializable {
         this.password = password;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    public String getEmail() {
+        return email;
     }
 
-    public void setAuthorities(Set<SimpleGrantedAuthority> authorities) {
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setNotSuspended(boolean notSuspended) {
+        this.notSuspended = notSuspended;
+    }
+
+    public void setAuthorities(Collection<GrantedAuthority> authorities) {
         this.authorities = authorities;
     }
 
@@ -72,21 +81,21 @@ public class AppUserDetails implements UserDetails, Serializable {
 
     @Override
     public boolean isAccountNonExpired() {
-        return active;
+        return !notSuspended;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return active;
+        return !notSuspended;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return active;
+        return !notSuspended;
     }
 
     @Override
     public boolean isEnabled() {
-        return active;
+        return !notSuspended;
     }
 }

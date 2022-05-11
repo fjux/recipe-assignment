@@ -112,11 +112,7 @@ public class EntityToDTOConverter implements DTOService{
         AppUserDTO appUserDTO = new AppUserDTO();
         appUserDTO.setAppUserDTOId(appUser.getUserId());
         appUserDTO.setUsername(appUser.getUsername());
-        appUserDTO.setRoles(
-                appUser.getRoles().stream()
-                        .map(AppRole::getUserRole)
-                        .collect(Collectors.toList())
-        );
+        appUserDTO.setUserRole(appUser.getUserRole());
         return appUserDTO;
     }
 }

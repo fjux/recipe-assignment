@@ -8,5 +8,5 @@ public class ValidationMessages {
     public static final String USERNAME_TAKEN = "Username already taken";
     public static final String PASSWORD_REGEX = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$";
     public static final String WEAK_PASSWORD = "The password is to weak. 8 characters with at least one number and one letter";
-
+    public static final String EMAIL_NOT_AVAILABLE = "This email is already taken";
 }

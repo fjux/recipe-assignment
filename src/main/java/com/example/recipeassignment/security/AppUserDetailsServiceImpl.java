@@ -1,7 +1,6 @@
 package com.example.recipeassignment.security;
 
 import com.example.recipeassignment.data.AppUserRepository;
-import com.example.recipeassignment.model.entity.AppRole;
 import com.example.recipeassignment.model.entity.AppUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -11,8 +10,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 @Transactional
@@ -32,14 +31,15 @@ public class AppUserDetailsServiceImpl implements UserDetailsService {
 
         AppUserDetails appUserDetails = new AppUserDetails();
         appUserDetails.setUserId(appUser.getUserId());
-        appUserDetails.setUsername(username);
+        appUserDetails.setUsername(appUser.getUsername());
         appUserDetails.setPassword(appUser.getPassword());
-        appUserDetails.setActive(true);
-        Set<SimpleGrantedAuthority> authoritySet = new HashSet<>();
-        for(AppRole appRole : appUser.getRoles()){
-            authoritySet.add(new SimpleGrantedAuthority(appRole.getUserRole().name()));
-        }
-        appUserDetails.setAuthorities(authoritySet);
+        appUserDetails.setEmail(appUser.getEmail());
+        appUserDetails.setNotSuspended(true);
+        appUserDetails.setAuthorities(
+                Stream.of(appUser.getUserRole())
+                        .map(userRole -> new SimpleGrantedAuthority(userRole.name()))
+                        .collect(Collectors.toSet())
+        );
         return appUserDetails;
     }
 }

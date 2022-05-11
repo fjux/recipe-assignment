@@ -56,7 +56,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         AppUserDetails appUserDetails = (AppUserDetails) authResult.getPrincipal();
 
         if(appUserDetails != null){
-            String jwt = jwtUtil.fromAppUserDetails(appUserDetails);
+            String jwt = jwtUtil.buildToken(appUserDetails);
             Map<String, String> body = new HashMap<>();
             body.put("accessToken", jwt);
             ObjectMapper objectMapper = new ObjectMapper();

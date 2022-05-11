@@ -1,16 +1,17 @@
 package com.example.recipeassignment.model.dto.view;
 
 import com.example.recipeassignment.model.constants.UserRole;
-import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.io.Serializable;
-import java.util.List;
+import java.time.LocalDate;
 
 public class AppUserDTO implements Serializable {
     private String appUserDTOId;
     private String username;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private List<UserRole> roles;
+    private UserRole userRole;
+    private String email;
+    private LocalDate registrationDate;
+    private boolean suspended;
 
     public AppUserDTO() {
     }
@@ -31,11 +32,35 @@ public class AppUserDTO implements Serializable {
         this.username = username;
     }
 
-    public List<UserRole> getRoles() {
-        return roles;
+    public UserRole getUserRole() {
+        return userRole;
     }
 
-    public void setRoles(List<UserRole> roles) {
-        this.roles = roles;
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public LocalDate getRegistrationDate() {
+        return registrationDate;
+    }
+
+    public void setRegistrationDate(LocalDate registrationDate) {
+        this.registrationDate = registrationDate;
+    }
+
+    public boolean isSuspended() {
+        return suspended;
+    }
+
+    public void setSuspended(boolean suspended) {
+        this.suspended = suspended;
     }
 }

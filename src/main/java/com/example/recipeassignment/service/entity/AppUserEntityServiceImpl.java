@@ -1,11 +1,9 @@
 package com.example.recipeassignment.service.entity;
 
-import com.example.recipeassignment.data.AppRoleRepository;
 import com.example.recipeassignment.data.AppUserRepository;
 import com.example.recipeassignment.exception.AppResourceNotFoundException;
 import com.example.recipeassignment.model.constants.UserRole;
 import com.example.recipeassignment.model.dto.form.AppUserForm;
-import com.example.recipeassignment.model.entity.AppRole;
 import com.example.recipeassignment.model.entity.AppUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -21,13 +19,11 @@ import java.util.Optional;
 public class AppUserEntityServiceImpl implements AppUserEntityService{
 
     private final AppUserRepository appUserRepository;
-    private final AppRoleRepository appRoleRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    public AppUserEntityServiceImpl(AppUserRepository appUserRepository, AppRoleRepository appRoleRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public AppUserEntityServiceImpl(AppUserRepository appUserRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.appUserRepository = appUserRepository;
-        this.appRoleRepository = appRoleRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
@@ -47,31 +43,12 @@ public class AppUserEntityServiceImpl implements AppUserEntityService{
         AppUser appUser = new AppUser();
         appUser.setUsername(form.getUsername());
         appUser.setPassword(bCryptPasswordEncoder.encode(form.getPassword()));
-        AppRole appRole = appRoleRepository.findByUserRole(role)
-                .orElseThrow(()-> new AppResourceNotFoundException("Could not find AppRole"));
-        appUser.addAppRole(appRole);
+        appUser.setUserRole(form.getUserRole());
+        appUser.setEmail(form.getEmail());
+        appUser.setSuspended(false);
         return appUserRepository.save(appUser);
     }
 
-    @Override
-    public AppUser addRole(String id, UserRole role) {
-        AppUser appUser = findById(id);
-        AppRole appRole = appRoleRepository.findByUserRole(role)
-                .orElseThrow(()-> new AppResourceNotFoundException("Could not find role"));
-        appUser.addAppRole(appRole);
-
-        return appUserRepository.save(appUser);
-    }
-
-    @Override
-    public AppUser removeRole(String id, UserRole role) {
-        AppUser appUser = findById(id);
-        AppRole appRole = appRoleRepository.findByUserRole(role)
-                .orElseThrow(()-> new AppResourceNotFoundException("Could not find role"));
-        appUser.removeAppRole(appRole);
-
-        return appUserRepository.save(appUser);
-    }
 
     @Override
     public AppUser create(AppUserForm appUserForm) {
@@ -94,21 +71,32 @@ public class AppUserEntityServiceImpl implements AppUserEntityService{
 
     @Override
     public AppUser update(String id, AppUserForm appUserForm) {
+        if(id == null) throw new IllegalArgumentException("Id was null");
+        if(appUserForm == null) throw new IllegalArgumentException("AppUser form was null");
+        if(!id.equals(appUserForm.getAppUserFormId())){
+            throw new IllegalStateException("Id did not match appUserFormId");
+        }
+
         AppUser appUser = findById(id);
         Optional<AppUser> optional = appUserRepository.findByUsername(appUserForm.getUsername().trim());
         if(optional.isPresent() && !id.equals(optional.get().getUserId())){
             throw new IllegalArgumentException("Username is already taken");
+        }else {
+            appUser.setUsername(appUserForm.getUsername().trim());
         }
-        appUser.setUsername(appUserForm.getUsername());
+        Optional<AppUser> optional1 = appUserRepository.findByEmail(appUserForm.getEmail().trim());
+        if(optional1.isPresent() && !id.equals(optional1.get().getUserId())){
+            throw new IllegalArgumentException("Email is already taken");
+        }else{
+            appUser.setEmail(appUserForm.getEmail().trim());
+        }
         appUser.setPassword(bCryptPasswordEncoder.encode(appUserForm.getPassword()));
-        appUser = appUserRepository.save(appUser);
-        return appUser;
+
+        return appUserRepository.save(appUser);
     }
 
     @Override
     public void delete(String id) {
-        AppUser appUser = findById(id);
-        appUser.setRoles(null);
         appUserRepository.deleteById(id);
     }
 }

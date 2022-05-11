@@ -1,32 +1,42 @@
 package com.example.recipeassignment.model.entity;
 
+import com.example.recipeassignment.model.constants.UserRole;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.time.LocalDate;
 
 import static com.example.recipeassignment.model.constants.EntityConstants.GENERATOR;
 import static com.example.recipeassignment.model.constants.EntityConstants.UUID_GENERATOR;
 
 @Entity
+@Table(name = "app_users")
 public class AppUser {
     @Id
     @GeneratedValue(generator = GENERATOR)
     @GenericGenerator(name = GENERATOR, strategy = UUID_GENERATOR)
-    @Column(updatable = false)
+    @Column(updatable = false, name = "id")
     private String userId;
-    @Column(length = 100, unique = true)
+    @Column(name = "username", length = 100, unique = true)
     private String username;
+    @Column(name = "password")
     private String password;
-    @ManyToMany
-    private Set<AppRole> roles;
+    @Column(name = "user_role")
+    private UserRole userRole;
+    @Column(name = "email", unique = true)
+    private String email;
+    @Column(name = "reg_date")
+    private LocalDate registrationDate;
+    @Column(name = "suspended")
+    private boolean suspended;
 
-    public AppUser(String userId, String username, String password) {
+    public AppUser(String userId, String username, String password, String email, LocalDate registrationDate, boolean suspended) {
         this.userId = userId;
         this.username = username;
         this.password = password;
+        this.email = email;
+        this.registrationDate = registrationDate;
+        this.suspended = suspended;
     }
 
     public AppUser() {
@@ -44,8 +54,8 @@ public class AppUser {
         return username;
     }
 
-    public void setUsername(String userName) {
-        this.username = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -56,55 +66,40 @@ public class AppUser {
         this.password = password;
     }
 
-    public Set<AppRole> getRoles() {
-        if(roles == null) roles = new HashSet<>();
-        return roles;
+    public UserRole getUserRole() {
+        return userRole;
     }
 
-    public void setRoles(Set<AppRole> roles) {
-        if(roles == null) roles = new HashSet<>();
-        if(roles.isEmpty()) {
-            if (this.roles != null) {
-                this.roles.forEach(appRole -> appRole.getAppUsers().remove(this));
-            }
-        }else{
-            roles.forEach(appRole -> appRole.getAppUsers().add(this));
-        }
-        this.roles = roles;
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
     }
 
-    public void addAppRole(AppRole appRole){
-        if(appRole == null) throw new IllegalArgumentException("AppRole was null");
-        if(roles == null) roles = new HashSet<>();
-        roles.add(appRole);
-        appRole.getAppUsers().add(this);
+    public String getEmail() {
+        return email;
     }
 
-    public void removeAppRole(AppRole appRole){
-        if(appRole == null) throw new IllegalArgumentException("AppRole was null");
-        if(roles == null) roles = new HashSet<>();
-        roles.remove(appRole);
-        appRole.getAppUsers().remove(this);
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof AppUser)) return false;
-        AppUser appUser = (AppUser) o;
-        return getUserId().equals(appUser.getUserId()) && getUsername().equals(appUser.getUsername());
+    public LocalDate getRegistrationDate() {
+        return registrationDate;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(getUserId(), getUsername());
+    public void setRegistrationDate(LocalDate registrationDate) {
+        this.registrationDate = registrationDate;
     }
 
-    @Override
-    public String toString() {
-        return "AppUser{" +
-                "userId='" + userId + '\'' +
-                ", userName='" + username + '\'' +
-                '}';
+    public boolean isSuspended() {
+        return suspended;
+    }
+
+    public void setSuspended(boolean suspended) {
+        this.suspended = suspended;
+    }
+
+    @PrePersist
+    void prePersist(){
+        registrationDate = LocalDate.now();
     }
 }
